@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "brand": "Pirelli",
+    "model": "Cinturato P1",
+    "width": 165,
+    "profile": 70,
+    "rim": 14,
+    "outletPrice": 222.00
+  },
+  {
+    "id": 2,
+    "brand": "Goodyear",
+    "model": "Kelly Edge Touring",
+    "width": 175,
+    "profile": 70,
+    "rim": 14,
+    "outletPrice": 239.40
+  },
+  {
+    "id": 3,
+    "brand": "Michelin",
+    "model": "Energy XM2+",
+    "width": 185,
+    "profile": 60,
+    "rim": 15,
+    "outletPrice": 329.40
+  },
+  {
+    "id": 4,
+    "brand": "Bridgestone",
+    "model": "Ecopia EP150",
+    "width": 185,
+    "profile": 65,
+    "rim": 15,
+    "outletPrice": 317.40
+  },
+  {
+    "id": 5,
+    "brand": "Pirelli",
+    "model": "Cinturato P7",
+    "width": 195,
+    "profile": 55,
+    "rim": 16,
+    "outletPrice": 389.40
+  },
+  {
+    "id": 6,
+    "brand": "Michelin",
+    "model": "Primacy 4",
+    "width": 205,
+    "profile": 55,
+    "rim": 16,
+    "outletPrice": 419.40
+  },
+  {
+    "id": 7,
+    "brand": "Goodyear",
+    "model": "EfficientGrip SUV",
+    "width": 205,
+    "profile": 65,
+    "rim": 16,
+    "outletPrice": 479.40
+  },
+  {
+    "id": 8,
+    "brand": "Pirelli",
+    "model": "Scorpion HT",
+    "width": 225,
+    "profile": 60,
+    "rim": 17,
+    "outletPrice": 659.40
+  }
+]

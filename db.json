@@ -1,0 +1,53 @@
+{
+  "orders": [
+    {
+      "transaction_hash": "wmvmek90vc",
+      "amount": 296.46,
+      "status": "paid",
+      "items": [
+        {
+          "product_hash": "yrwftmealp",
+          "title": "Michelin Energy XM2+",
+          "price": 329.4,
+          "quantity": 1
+        }
+      ],
+      "shipping_address": {
+        "cep": "01311200",
+        "street": "Avenida Paulista",
+        "number": "1000",
+        "complement": "42",
+        "neighborhood": "Bela Vista",
+        "city": "São Paulo",
+        "state": "SP"
+      },
+      "user_id": "guest",
+      "created_at": "2026-06-28T18:59:09.216Z"
+    },
+    {
+      "transaction_hash": "44458890",
+      "amount": 670.32,
+      "status": "waiting_payment",
+      "items": [
+        {
+          "product_hash": "2",
+          "title": "Goodyear Kelly Edge Touring (175/70 R14)",
+          "price": 167.58,
+          "quantity": 4
+        }
+      ],
+      "shipping_address": {
+        "cep": "08042080",
+        "street": "Rua João Nicário Eleutério",
+        "number": "963",
+        "complement": "cs",
+        "neighborhood": "Cidade Nova São Miguel",
+        "city": "São Paulo",
+        "state": "SP"
+      },
+      "user_id": "guest",
+      "created_at": "2026-06-28T23:59:07.704Z"
+    }
+  ],
+  "profiles": []
+}

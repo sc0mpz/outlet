@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PneuOutlet | Pneus de Alta Performance com Desconto de Outlet</title>
+    <meta name="description" content="Encontre as melhores marcas de pneus (Michelin, Pirelli, Bridgestone) com descontos de outlet de até 50%. Montagem grátis e entrega rápida.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="main-header" id="mainHeader">
+        <div class="header-container">
+            <div class="logo">
+                <a href="#" class="logo-link" style="color: #111111;">
+                    PNEU<span class="logo-accent">OUTLET</span>
+                </a>
+            </div>
+            
+            <nav class="nav-menu" id="navMenu">
+                <ul>
+                    <li><a href="#" class="active">Início</a></li>
+                    <li><a href="#catalogo">Catálogo</a></li>
+                    <li><a href="#vantagens">Vantagens</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <button class="cart-btn" id="cartToggle" aria-label="Abrir carrinho">
+                    <svg class="cart-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    <span class="cart-badge" id="cartBadgeCount">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="hero-tag">Outlet Oficial de Pneus</span>
+            <h1>Pneus Michelin, Pirelli e Bridgestone a preço de fábrica — sem intermediários.</h1>
+            <p>Sabemos que ter e manter um carro no Brasil é um desafio financeiro diário (combustível, impostos, manutenção). Por isso, eliminamos todos os intermediários e oferecemos pneus novos e originais direto de fábrica a preço de custo — garantindo preços 40% mais baratos do que a média da internet.</p>
+            
+            <div class="hero-features">
+                <div class="hero-feat-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="feat-icon"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                    <span>10% OFF no Pix</span>
+                </div>
+                <div class="hero-feat-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="feat-icon"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                    <span>Até 12x Sem Juros</span>
+                </div>
+                <div class="hero-feat-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="feat-icon"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                    <span>Garantia de 5 anos</span>
+                </div>
+            </div>
+            
+            <a href="#catalogo" class="btn-primary btn-hero">Economizar Agora</a>
+        </div>
+    </section>
+
+    <!-- MAIN APP WRAPPER -->
+    <main class="main-container" id="catalogo">
+        <!-- SEARCH & QUICK BAR -->
+        <div class="search-bar-container">
+            <div class="search-box">
+                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <input type="text" id="searchInput" placeholder="Busque pelo seu carro, marca ou medida... (Ex: Onix, HB20, Kwid, 175/70 R14)">
+            </div>
+        </div>
+
+        <div class="app-layout">
+            <!-- FILTER SIDEBAR -->
+            <aside class="filter-sidebar" id="filterSidebar">
+                <div class="filter-header">
+                    <h3>Filtros de Busca</h3>
+                    <button class="btn-reset" id="btnResetFilters">Limpar Tudo</button>
+                </div>
+                
+                <div class="filter-groups">
+                    <!-- Vehicle Type -->
+                    <div class="filter-group">
+                        <label class="filter-label">Tipo de Veículo</label>
+                        <div class="vehicle-types">
+                            <button class="vehicle-btn" data-type="Carro" aria-label="Carro">
+                                <span class="vehicle-icon">🚗</span>
+                                <span class="vehicle-text">Passeio</span>
+                            </button>
+                            <button class="vehicle-btn" data-type="SUV" aria-label="SUV / Pickup">
+                                <span class="vehicle-icon">🚙</span>
+                                <span class="vehicle-text">SUV / 4x4</span>
+                            </button>
+                            <button class="vehicle-btn" data-type="Van" aria-label="Van / Utilitário">
+                                <span class="vehicle-icon">🚐</span>
+                                <span class="vehicle-text">Carga/Van</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Width -->
+                    <div class="filter-group">
+                        <label for="filterWidth" class="filter-label">Largura (mm)</label>
+                        <select id="filterWidth" class="filter-select">
+                            <option value="">Todas</option>
+                            <option value="175">175</option>
+                            <option value="185">185</option>
+                            <option value="195">195</option>
+                            <option value="205">205</option>
+                            <option value="215">215</option>
+                            <option value="225">225</option>
+                            <option value="235">235</option>
+                            <option value="265">265</option>
+                        </select>
+                    </div>
+
+                    <!-- Aspect Ratio / Profile -->
+                    <div class="filter-group">
+                        <label for="filterProfile" class="filter-label">Perfil (%)</label>
+                        <select id="filterProfile" class="filter-select">
+                            <option value="">Todos</option>
+                            <option value="40">40</option>
+                            <option value="45">45</option>
+                            <option value="50">50</option>
+                            <option value="55">55</option>
+                            <option value="60">60</option>
+                            <option value="65">65</option>
+                            <option value="70">70</option>
+                        </select>
+                    </div>
+
+                    <!-- Rim / Aro -->
+                    <div class="filter-group">
+                        <label for="filterRim" class="filter-label">Aro (Polegadas)</label>
+                        <select id="filterRim" class="filter-select">
+                            <option value="">Todos</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="20">20</option>
+                        </select>
+                    </div>
+
+                    <!-- Brand -->
+                    <div class="filter-group">
+                        <label for="filterBrand" class="filter-label">Marca</label>
+                        <select id="filterBrand" class="filter-select">
+                            <option value="">Todas</option>
+                            <option value="Michelin">Michelin</option>
+                            <option value="Pirelli">Pirelli</option>
+                            <option value="Bridgestone">Bridgestone</option>
+                            <option value="Goodyear">Goodyear</option>
+                            <option value="Dunlop">Dunlop</option>
+                        </select>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- PRODUCT CATALOG -->
+            <section class="catalog-section">
+                <div class="catalog-header">
+                    <p class="results-count" id="resultsCount">Carregando pneus...</p>
+                    
+                    <div class="sort-box">
+                        <label for="sortSelect">Ordenar por:</label>
+                        <select id="sortSelect" class="sort-select">
+                            <option value="discount">Maior Desconto (%)</option>
+                            <option value="price-asc">Menor Preço</option>
+                            <option value="price-desc">Maior Preço</option>
+                            <option value="brand">Marca (A-Z)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Products Grid -->
+                <div class="products-grid" id="productsGrid">
+                    <!-- Cards will be injected dynamically by app.js -->
+                </div>
+
+                <!-- No Results State -->
+                <div class="no-results hidden" id="noResultsState">
+                    <span class="no-results-icon">🔍</span>
+                    <h4>Nenhum pneu encontrado</h4>
+                    <p>Tente ajustar os filtros ou pesquisar por outra medida.</p>
+                    <button class="btn-primary" id="btnResetFiltersEmpty">Limpar Filtros</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- TRUST & ADVANTAGES SECTION -->
+    <section class="advantages-section" id="vantagens">
+        <div class="section-container">
+            <h2 class="section-title">Aliviando o seu bolso para manter o carro rodando</h2>
+            <div class="advantages-grid">
+                <div class="advantage-card">
+                    <div class="adv-icon">💰</div>
+                    <h3>Preço de Custo Real</h3>
+                    <p>Eliminamos intermediários, custos de lojas luxuosas e comissões. Você compra o pneu a preço de custo e economiza 40% de verdade.</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="adv-icon">🚚</div>
+                    <h3>Entrega Rápida</h3>
+                    <p>Logística expressa com entregas rápidas e seguras para todo o Brasil. Receba diretamente na sua residência.</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="adv-icon">🛡️</div>
+                    <h3>Segurança sem Dívidas</h3>
+                    <p>Todos os pneus são novos, originais de fábrica e possuem 5 anos de garantia. Segurança para sua família sem pesar no bolso.</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="adv-icon">💳</div>
+                    <h3>Facilidade de Pagamento</h3>
+                    <p>Parcele em até 12x sem juros no cartão de crédito ou ganhe +10% de desconto adicional pagando à vista no Pix.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SHOPPING CART SLIDE-OUT DRAWER -->
+    <div class="cart-drawer-overlay" id="cartDrawerOverlay"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-drawer-header">
+            <h3>Seu Carrinho</h3>
+            <button class="close-cart" id="closeCartBtn" aria-label="Fechar carrinho">&times;</button>
+        </div>
+        
+        <!-- Cart Items List -->
+        <div class="cart-drawer-body" id="cartItemsList">
+            <!-- Dynamically populated -->
+        </div>
+        
+        <!-- Cart Summary Footer -->
+        <div class="cart-drawer-footer" id="cartDrawerFooter">
+            <div class="summary-row font-small text-muted">
+                <span>Total Sem Desconto</span>
+                <span id="cartSubtotalSemDesconto">R$ 0,00</span>
+            </div>
+            <div class="summary-row font-small discount-highlight">
+                <span>Economia no Outlet</span>
+                <span id="cartDiscountSavings">-R$ 0,00</span>
+            </div>
+            <hr class="summary-divider">
+            <div class="summary-row total-row">
+                <span>Total a Pagar</span>
+                <span id="cartTotalPayable">R$ 0,00</span>
+            </div>
+            <div class="payment-methods">
+                ou <span class="pix-accent" id="cartPixPrice">R$ 0,00</span> no Pix (10% OFF adicional)
+            </div>
+            <button class="btn-primary btn-checkout" id="checkoutBtn">Finalizar Compra</button>
+            <p class="cart-notice">🚚 Frete com tarifas reduzidas para todo o Brasil!</p>
+        </div>
+    </div>
+
+    <!-- PRODUCT DETAILS MODAL -->
+    <div class="modal-overlay" id="productModalOverlay"></div>
+    <div class="modal-container" id="productModal">
+        <button class="close-modal" id="closeModalBtn" aria-label="Fechar modal">&times;</button>
+        
+        <div class="modal-content" id="modalProductDetails">
+            <!-- Dynamically populated by app.js -->
+        </div>
+    </div>
+
+    <!-- CONTACT & FOOTER SECTION -->
+    <section class="contact-section" id="contato">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Fale com nossos especialistas</h2>
+                <p>Ficou com alguma dúvida sobre qual pneu é ideal para o seu veículo? Nossa equipe técnica está pronta para ajudar.</p>
+                <div class="contact-details">
+                    <div class="contact-detail-item">
+                        <span class="detail-icon">📞</span>
+                        <div>
+                            <h4>Telefone e WhatsApp</h4>
+                            <p>0800 777 9000 (Seg à Sex, 8h às 18h)</p>
+                        </div>
+                    </div>
+                    <div class="contact-detail-item">
+                        <span class="detail-icon">📍</span>
+                        <div>
+                            <h4>Centro de Distribuição Central</h4>
+                            <p>Av. das Nações Unidas, 14200 - São Paulo, SP</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form-container">
+                <form class="contact-form" id="contactForm" onsubmit="event.preventDefault(); alert('Mensagem enviada com sucesso! Nossos especialistas entrarão em contato.'); this.reset();">
+                    <div class="form-group">
+                        <label for="contactName">Nome Completo</label>
+                        <input type="text" id="contactName" placeholder="Ex: João Silva" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactEmail">E-mail</label>
+                        <input type="email" id="contactEmail" placeholder="Ex: joao@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactMsg">Mensagem / Dúvida técnica</label>
+                        <textarea id="contactMsg" rows="4" placeholder="Informe a marca/modelo do seu carro ou as medidas do pneu..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary btn-full-width">Enviar Mensagem</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 PneuOutlet S.A. CNPJ: 12.345.678/0001-90. Todos os direitos reservados.</p>
+            <p class="footer-small">Preços e condições válidos exclusivamente para compras no site. Imagens meramente ilustrativas.</p>
+        </div>
+    </footer>
+
+    <!-- App Logic -->
+    <script type="module" src="/app.js"></script>
+</body>
+</html>

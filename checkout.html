@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Compra | PneuOutlet</title>
+    <meta name="description" content="Finalize seu pedido de pneus novos a preço de custo no outlet oficial.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body class="checkout-page-body">
+    <!-- HEADER MINIMAL -->
+    <header class="main-header select-none">
+        <div class="header-container">
+            <div class="logo">
+                <a href="/index.html" class="logo-link" style="color: #111111;">
+                    PNEU<span class="logo-accent">OUTLET</span>
+                </a>
+            </div>
+            
+            <!-- LOGGED USER INFO HEADER -->
+            <div class="header-user-info" id="headerUserInfo">
+                <!-- Populated by JS: Olá, Nome! (Desconectar) -->
+            </div>
+
+            <div>
+                <a href="/index.html" class="btn-back-catalog">
+                    &larr; Voltar ao Catálogo
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- CHECKOUT CONTAINER -->
+    <main class="main-container" style="padding-top: calc(var(--header-height) + 2rem);">
+        
+        <!-- ==========================================
+             AUTHENTICATION SECTION (LOGIN / REGISTER)
+             ========================================== -->
+        <div class="auth-container" id="authSection">
+            <div class="auth-card">
+                <div class="auth-tabs">
+                    <button type="button" class="auth-tab-btn active" id="tabBtnRegister">Criar Conta</button>
+                    <button type="button" class="auth-tab-btn" id="tabBtnLogin">Já tenho Conta</button>
+                </div>
+
+                <!-- REGISTRATION FORM -->
+                <form id="registerForm" class="auth-form">
+                    <h3 class="auth-form-title">Cadastre-se para finalizar a compra</h3>
+                    <p class="auth-form-subtitle">Com a sua conta você acompanha o pedido e emite a Nota Fiscal dos pneus.</p>
+                    
+                    <div class="form-group col-full" style="margin-bottom: 1rem;">
+                        <label for="regName">Nome Completo</label>
+                        <input type="text" id="regName" placeholder="Ex: João H. Silva" required>
+                    </div>
+                    
+                    <div class="form-group col-full" style="margin-bottom: 1rem;">
+                        <label for="regCpf">CPF</label>
+                        <input type="text" id="regCpf" placeholder="Apenas números (11 dígitos)" maxlength="14" required>
+                    </div>
+                    
+                    <div class="form-group col-full" style="margin-bottom: 1rem;">
+                        <label for="regPhone">WhatsApp / Telefone</label>
+                        <input type="tel" id="regPhone" placeholder="Ex: (11) 99999-9999" required>
+                    </div>
+                    
+                    <div class="form-group col-full" style="margin-bottom: 1rem;">
+                        <label for="regEmail">E-mail</label>
+                        <input type="email" id="regEmail" placeholder="Ex: joao@email.com" required>
+                    </div>
+                    
+                    <div class="form-group col-full" style="margin-bottom: 1.25rem;">
+                        <label for="regPassword">Senha</label>
+                        <input type="password" id="regPassword" placeholder="Crie uma senha forte" required>
+                    </div>
+
+                    <div class="form-group col-full" style="margin-bottom: 1.5rem;">
+                        <label for="regPasswordConfirm">Confirmar Senha</label>
+                        <input type="password" id="regPasswordConfirm" placeholder="Repita a senha criada" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary btn-full-width btn-hero">Criar Conta e Prosseguir</button>
+                </form>
+
+                <!-- LOGIN FORM -->
+                <form id="loginForm" class="auth-form hidden">
+                    <h3 class="auth-form-title">Entrar na sua Conta</h3>
+                    <p class="auth-form-subtitle">Acesse com seu e-mail e senha cadastrados.</p>
+                    
+                    <div class="form-group col-full" style="margin-bottom: 1rem;">
+                        <label for="loginEmail">E-mail</label>
+                        <input type="email" id="loginEmail" placeholder="Ex: joao@email.com" required>
+                    </div>
+                    
+                    <div class="form-group col-full" style="margin-bottom: 1.5rem;">
+                        <label for="loginPassword">Senha</label>
+                        <input type="password" id="loginPassword" placeholder="Sua senha" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary btn-full-width btn-hero">Acessar e Prosseguir</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             MAIN CHECKOUT CONTENT (SHIPPING & PAYMENT)
+             ========================================== -->
+        <div class="checkout-layout hidden" id="checkoutMainContent">
+            <!-- LEFT COLUMN: FORM -->
+            <section class="checkout-form-column">
+                <form id="checkoutForm" onsubmit="event.preventDefault();">
+                    <!-- SECTION 1: DADOS PESSOAIS (PRE-FILLED) -->
+                    <div class="checkout-card">
+                        <h2 class="card-title"><span class="title-step">1</span> Dados de Faturamento</h2>
+                        <div class="form-grid">
+                            <div class="form-group col-full">
+                                <label for="custName">Nome do Comprador</label>
+                                <input type="text" id="custName" readonly style="background-color: rgba(255,255,255,0.02); color: var(--text-secondary); cursor: not-allowed;">
+                            </div>
+                            <div class="form-group">
+                                <label for="custCpf">CPF para Nota Fiscal</label>
+                                <input type="text" id="custCpf" readonly style="background-color: rgba(255,255,255,0.02); color: var(--text-secondary); cursor: not-allowed;">
+                            </div>
+                            <div class="form-group">
+                                <label for="custPhone">WhatsApp / Telefone</label>
+                                <input type="tel" id="custPhone" readonly style="background-color: rgba(255,255,255,0.02); color: var(--text-secondary); cursor: not-allowed;">
+                            </div>
+                            <div class="form-group col-full">
+                                <label for="custEmail">E-mail de Confirmação</label>
+                                <input type="email" id="custEmail" readonly style="background-color: rgba(255,255,255,0.02); color: var(--text-secondary); cursor: not-allowed;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 2: ENDEREÇO DE ENTREGA -->
+                    <div class="checkout-card">
+                        <h2 class="card-title"><span class="title-step">2</span> Endereço de Entrega</h2>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="shippingCep">CEP</label>
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <input type="text" id="shippingCep" placeholder="01311-200" required>
+                                    <button type="button" class="btn-secondary" id="btnSearchCep" style="padding: 0 1rem; font-size: 0.9rem;">Buscar</button>
+                                </div>
+                            </div>
+                            <div class="form-group col-3-4">
+                                <label for="shippingStreet">Rua / Avenida</label>
+                                <input type="text" id="shippingStreet" placeholder="Avenida Paulista" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="shippingNumber">Número</label>
+                                <input type="text" id="shippingNumber" placeholder="1000" required>
+                            </div>
+                            <div class="form-group col-3-4">
+                                <label for="shippingCompl">Complemento / Apto</label>
+                                <input type="text" id="shippingCompl" placeholder="Apto 42, Bloco B" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="shippingNeighborhood">Bairro</label>
+                                <input type="text" id="shippingNeighborhood" placeholder="Bela Vista" required>
+                            </div>
+                            <div class="form-group col-3-4">
+                                <label for="shippingCity">Cidade</label>
+                                <input type="text" id="shippingCity" placeholder="São Paulo" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="shippingState">Estado</label>
+                                <input type="text" id="shippingState" placeholder="SP" required maxlength="2">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 3: MÉTODO DE PAGAMENTO (EXCLUSIVO PIX) -->
+                    <div class="checkout-card">
+                        <h2 class="card-title"><span class="title-step">3</span> Pagamento</h2>
+                        
+                        <div class="payment-selection-grid" style="grid-template-columns: 1fr;">
+                            <div class="payment-option active" style="cursor: default;">
+                                <span class="pay-icon">⚡</span>
+                                <div class="pay-info">
+                                    <strong>Pagamento via Pix</strong>
+                                    <span class="pay-promo-text">+10% de Desconto Adicional Aplicado!</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 1rem; line-height: 1.4;">
+                            A PneuOutlet trabalha exclusivamente com Pix a preço de custo. Por isso, conseguimos repassar mais <strong>10% de desconto adicional</strong> direto para o seu bolso!
+                        </p>
+                    </div>
+                </form>
+            </section>
+
+            <!-- RIGHT COLUMN: SUMMARY & UPSELL -->
+            <section class="checkout-summary-column">
+                <!-- ITEMS IN CART -->
+                <div class="checkout-card">
+                    <h3 class="summary-card-title">Resumo do Pedido</h3>
+                    <div class="checkout-items-list" id="checkoutItemsList">
+                        <!-- Dynamically populated -->
+                    </div>
+                </div>
+
+                <!-- UPSELL BOX -->
+                <div class="checkout-card upsell-card-gradient">
+                    <div class="upsell-badge">OFERTA EXCLUSIVA</div>
+                    <h3 class="upsell-title">💡 Melhore sua Experiência</h3>
+                    
+                    <div class="upsell-items">
+                        <!-- UPSELL 1: ALINHAMENTO -->
+                        <label class="upsell-item-label">
+                            <input type="checkbox" id="upsellAlignment" class="upsell-checkbox">
+                            <div class="upsell-item-content">
+                                <div class="upsell-item-header">
+                                    <strong>🛠️ Alinhamento & Balanceamento 3D</strong>
+                                    <span class="upsell-price">+R$ 79,90</span>
+                                </div>
+                                <p class="upsell-desc">Garante o desgaste regular dos pneus novos. Economize R$ 120 comprando junto para agendamento nas oficinas credenciadas.</p>
+                            </div>
+                        </label>
+                        
+                        <!-- UPSELL 2: GARANTIA -->
+                        <label class="upsell-item-label">
+                            <input type="checkbox" id="upsellWarranty" class="upsell-checkbox">
+                            <div class="upsell-item-content">
+                                <div class="upsell-item-header">
+                                    <strong>🛡️ Garantia Blindada (2 Anos)</strong>
+                                    <span class="upsell-price" id="upsellWarrantyPriceText">+R$ 0,00</span>
+                                </div>
+                                <p class="upsell-desc">Proteção total contra furos, bolhas e rasgos provocados por buracos. Apenas R$ 29,90 por pneu adquirido.</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- PRICE STATEMENT -->
+                <div class="checkout-card">
+                    <div class="price-statement-rows">
+                        <div class="statement-row">
+                            <span>Subtotal (Valor Web)</span>
+                            <span id="statementSubtotal">R$ 0,00</span>
+                        </div>
+                        <div class="statement-row discount-highlight">
+                            <span>Economia de Outlet (40% OFF)</span>
+                            <span id="statementOutletSaving">-R$ 0,00</span>
+                        </div>
+                        <div class="statement-row discount-highlight font-small" id="rowQtyDiscount" style="display: none;">
+                            <span>Desconto Progressivo (Par/Jogo)</span>
+                            <span id="statementQtySaving">-R$ 0,00</span>
+                        </div>
+                        <div class="statement-row" id="rowUpsell" style="display: none;">
+                            <span>Serviços de Upsell</span>
+                            <span id="statementUpsellTotal">+R$ 0,00</span>
+                        </div>
+                        <div class="statement-row pix-accent" id="rowPixDiscount" style="display: flex;">
+                            <span>Desconto Pix (+10% OFF extra)</span>
+                            <span id="statementPixSaving">-R$ 0,00</span>
+                        </div>
+                        <hr class="summary-divider" style="margin: 0.5rem 0;">
+                        <div class="statement-row total-row">
+                            <span>Total Geral</span>
+                            <span id="statementTotal">R$ 0,00</span>
+                        </div>
+                    </div>
+                    
+                    <button type="button" class="btn-primary btn-full-width btn-hero" id="btnPlaceOrder" style="margin-top: 1.5rem; font-size: 1.15rem;">
+                        Confirmar e Pagar
+                    </button>
+                    <p class="security-notice text-center font-small text-muted" style="margin-top: 1rem;">
+                        🔒 Pagamento 100% seguro. Seus dados estão criptografados.
+                    </p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- GATEWAY MODAL OVERLAYS -->
+    <div class="modal-overlay" id="gatewayOverlay"></div>
+    
+    <!-- PIX PAYMENT WINDOW -->
+    <div class="gateway-modal" id="modalPixGateway">
+        <div class="gateway-modal-header">
+            <h3>Pagamento via Pix</h3>
+            <button class="close-modal" id="closePixModal" aria-label="Fechar">&times;</button>
+        </div>
+        <div class="gateway-modal-body text-center">
+            <p class="pix-instruction">Escaneie o QR Code abaixo com o aplicativo do seu banco para finalizar a compra.</p>
+            
+            <div class="pix-qr-code-box">
+                <!-- Simulação de QR Code Pix -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="pix-qr-svg">
+                    <rect width="100" height="100" fill="white"/>
+                    <rect x="10" y="10" width="25" height="25" fill="black"/>
+                    <rect x="15" y="15" width="15" height="15" fill="white"/>
+                    <rect x="18" y="18" width="9" height="9" fill="black"/>
+                    
+                    <rect x="65" y="10" width="25" height="25" fill="black"/>
+                    <rect x="70" y="15" width="15" height="15" fill="white"/>
+                    <rect x="73" y="18" width="9" height="9" fill="black"/>
+                    
+                    <rect x="10" y="65" width="25" height="25" fill="black"/>
+                    <rect x="15" y="70" width="15" height="15" fill="white"/>
+                    <rect x="18" y="73" width="9" height="9" fill="black"/>
+                    
+                    <rect x="45" y="15" width="10" height="10" fill="black"/>
+                    <rect x="50" y="35" width="15" height="5" fill="black"/>
+                    <rect x="35" y="45" width="5" height="15" fill="black"/>
+                    <rect x="45" y="45" width="15" height="15" fill="black"/>
+                    <rect x="45" y="65" width="10" height="20" fill="black"/>
+                    <rect x="65" y="45" width="20" height="10" fill="black"/>
+                    <rect x="75" y="65" width="15" height="15" fill="black"/>
+                </svg>
+            </div>
+            
+            <div class="pix-value-badge">
+                Valor do Pix: <strong id="pixGatewayValue">R$ 0,00</strong>
+            </div>
+
+            <div class="pix-code-copy-box">
+                <input type="text" id="pixCodeText" value="00020101021226830014br.gov.bcb.pix2561api.pneuoutlet.com/v2/cob/982f80164c014df6874ebf4a6" readonly>
+                <button type="button" class="btn-primary" id="btnCopyPix" style="border-radius: 0 8px 8px 0; font-size: 0.9rem;">Copiar Pix</button>
+            </div>
+            
+            <p class="pix-timer">Código válido por: <strong id="pixTimerSeconds">05:00</strong></p>
+            <hr class="summary-divider" style="margin: 1.5rem 0;">
+            <div class="payment-processing-spinner">
+                <span class="spinner-dot"></span> Aguardando confirmação do pagamento...
+            </div>
+        </div>
+    </div>
+
+    <!-- CREDIT CARD PROCESSING WINDOW -->
+    <div class="gateway-modal text-center" id="modalCardGateway" style="max-width: 400px; padding: 3rem;">
+        <div class="card-processing-animation">
+            <svg class="spinner-svg" viewBox="0 0 50 50">
+                <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+            </svg>
+        </div>
+        <h3 style="margin-top: 1.5rem;">Processando Transação</h3>
+        <p class="text-muted" style="margin-top: 0.5rem;">Estamos conectando à operadora do cartão...</p>
+    </div>
+
+    <!-- SUCCESS SCREEN MODAL -->
+    <div class="gateway-modal" id="modalSuccessGateway" style="max-width: 500px; padding: 3rem; text-align: center;">
+        <div class="success-icon-box">🎉</div>
+        <h3 style="font-size: 1.75rem; margin-top: 1.5rem; color: var(--accent-success);">Compra Aprovada!</h3>
+        <p class="text-secondary" style="margin-top: 0.75rem;">Seu pedido foi processado com sucesso. Obrigado por comprar no PneuOutlet!</p>
+        
+        <div class="success-summary-box">
+            <p>Número do Pedido: <strong id="successOrderNum">#PO-83921</strong></p>
+            <p>Total Pago: <strong id="successTotalPaid">R$ 0,00</strong></p>
+            <p>Tempo de Entrega Estimado: <strong>24 a 48 horas</strong></p>
+        </div>
+        
+        <button type="button" class="btn-primary btn-full-width" id="btnSuccessOk" style="margin-top: 2rem;">
+            Voltar para a Loja
+        </button>
+    </div>
+
+    <!-- App Logic -->
+    <script type="module" src="/checkout.js"></script>
+</body>
+</html>
