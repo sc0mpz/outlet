@@ -5,10 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npx vite build",
     "preview": "vite preview",
     "dev:all": "concurrently \"npm run dev\" \"node server.js\""
-  },
+  }
   "devDependencies": {
     "concurrently": "^10.0.3"
   },
