@@ -226,10 +226,87 @@ async function logout() {
     window.location.reload();
 }
 
+
 function formatCPF(cpf) {
     const clean = cpf.replace(/\D/g, '');
     if (clean.length !== 11) return clean;
     return clean.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+}
+
+function validateCPF(cpf) {
+    const clean = cpf.replace(/\D/g, '');
+    if (clean.length !== 11) return false;
+    if (/^(\d)\1{10}$/.test(clean)) return false;
+    
+    let sum = 0;
+    let remainder;
+    
+    for (let i = 1; i <= 9; i++) {
+        sum += parseInt(clean.substring(i - 1, i)) * (11 - i);
+    }
+    remainder = (sum * 10) % 11;
+    if (remainder === 10 || remainder === 11) remainder = 0;
+    if (remainder !== parseInt(clean.substring(9, 10))) return false;
+    
+    sum = 0;
+    for (let i = 1; i <= 10; i++) {
+        sum += parseInt(clean.substring(i - 1, i)) * (12 - i);
+    }
+    remainder = (sum * 10) % 11;
+    if (remainder === 10 || remainder === 11) remainder = 0;
+    if (remainder !== parseInt(clean.substring(10, 11))) return false;
+    
+    return true;
+}
+
+function showInputStatus(inputEl, isValid, message) {
+    inputEl.classList.remove('is-valid', 'is-invalid');
+    inputEl.classList.add(isValid ? 'is-valid' : 'is-invalid');
+    
+    let msgEl = inputEl.nextElementSibling;
+    if (!msgEl || !msgEl.classList.contains('validation-message')) {
+        msgEl = document.createElement('span');
+        msgEl.className = 'validation-message';
+        inputEl.parentNode.insertBefore(msgEl, inputEl.nextSibling);
+    }
+    
+    msgEl.className = `validation-message ${isValid ? 'success' : 'error'}`;
+    msgEl.textContent = message || '';
+}
+
+function clearInputStatus(inputEl) {
+    inputEl.classList.remove('is-valid', 'is-invalid');
+    const msgEl = inputEl.nextElementSibling;
+    if (msgEl && msgEl.classList.contains('validation-message')) {
+        msgEl.remove();
+    }
+}
+
+function showCheckoutError(msg) {
+    let errorBox = document.getElementById('checkoutErrorBox');
+    if (!errorBox) {
+        errorBox = document.createElement('div');
+        errorBox.id = 'checkoutErrorBox';
+        errorBox.style.backgroundColor = 'rgba(220, 38, 38, 0.1)';
+        errorBox.style.border = '1px solid var(--accent-danger)';
+        errorBox.style.color = '#ef4444';
+        errorBox.style.borderRadius = '8px';
+        errorBox.style.padding = '1rem';
+        errorBox.style.fontSize = '0.9rem';
+        errorBox.style.marginBottom = '1.5rem';
+        errorBox.style.lineHeight = '1.4';
+        
+        elements.btnPlaceOrder.parentNode.insertBefore(errorBox, elements.btnPlaceOrder);
+    }
+    errorBox.innerHTML = `⚠️ <strong>Erro na finalização da compra:</strong> ${msg}`;
+    errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function clearCheckoutError() {
+    const errorBox = document.getElementById('checkoutErrorBox');
+    if (errorBox) {
+        errorBox.remove();
+    }
 }
 
 function renderCheckoutItems() {
@@ -294,16 +371,49 @@ function initListeners() {
         elements.registerForm.classList.add('hidden');
     });
 
-    // --- MÁSCARAS DE CPF E TELEFONE ---
+    // --- MÁSCARAS E VALIDAÇÕES EM TEMPO REAL ---
     elements.regCpf.addEventListener('input', (e) => {
-        e.target.value = applyMask(e.target.value, '999.999.999-99');
+        const val = e.target.value;
+        const masked = applyMask(val, '999.999.999-99');
+        e.target.value = masked;
+        
+        const clean = masked.replace(/\D/g, '');
+        if (clean.length === 0) {
+            clearInputStatus(e.target);
+        } else if (clean.length < 11) {
+            showInputStatus(e.target, false, "CPF incompleto (mínimo 11 dígitos)");
+        } else {
+            const isValid = validateCPF(clean);
+            showInputStatus(e.target, isValid, isValid ? "CPF válido" : "CPF inválido");
+        }
     });
+
+    elements.regEmail.addEventListener('input', (e) => {
+        const val = e.target.value.trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (val.length === 0) {
+            clearInputStatus(e.target);
+        } else if (emailRegex.test(val)) {
+            showInputStatus(e.target, true, "E-mail válido");
+        } else {
+            showInputStatus(e.target, false, "Formato de e-mail inválido");
+        }
+    });
+
     elements.regPhone.addEventListener('input', (e) => {
         const digits = e.target.value.replace(/\D/g, '');
         if (digits.length <= 10) {
             e.target.value = applyMask(e.target.value, '(99) 9999-9999');
         } else {
             e.target.value = applyMask(e.target.value, '(99) 99999-9999');
+        }
+        
+        if (digits.length === 0) {
+            clearInputStatus(e.target);
+        } else if (digits.length >= 10) {
+            showInputStatus(e.target, true, "Telefone válido");
+        } else {
+            showInputStatus(e.target, false, "Telefone incompleto");
         }
     });
 
@@ -319,8 +429,9 @@ function initListeners() {
         const passwordConfirm = elements.regPasswordConfirm.value;
         
         // Validações
-        if (cpf.length !== 11) {
-            alert("Por favor, insira um CPF válido com 11 dígitos.");
+        if (!validateCPF(cpf)) {
+            showInputStatus(elements.regCpf, false, "CPF inválido");
+            alert("Por favor, insira um CPF válido.");
             return;
         }
         if (password !== passwordConfirm) {
@@ -611,7 +722,8 @@ async function processOrderSubmit() {
         }
     }
 
-    elements.btnPlaceOrder.textContent = "Processando Transação...";
+    clearCheckoutError();
+    elements.btnPlaceOrder.classList.add('btn-loading');
     elements.btnPlaceOrder.disabled = true;
 
     try {
@@ -710,9 +822,9 @@ async function processOrderSubmit() {
 
     } catch (error) {
         console.error("Erro ao processar checkout:", error);
-        alert(`Erro ao finalizar a compra:\n"${error.message}"`);
+        showCheckoutError(error.message);
     } finally {
-        elements.btnPlaceOrder.textContent = "Confirmar e Pagar";
+        elements.btnPlaceOrder.classList.remove('btn-loading');
         elements.btnPlaceOrder.disabled = false;
     }
 }

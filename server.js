@@ -487,18 +487,22 @@ async function updateOrderStatusInDb(hash, status) {
     }
 }
 
-// Inicia o Servidor Express
-const server = app.listen(PORT, () => {
-    console.log(`🚀 Servidor Express Backend rodando em http://localhost:${PORT}`);
-});
+// Inicia o Servidor Express apenas se rodar diretamente (não na Vercel Serverless)
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+    const server = app.listen(PORT, () => {
+        console.log(`🚀 Servidor Express Backend rodando em http://localhost:${PORT}`);
+    });
 
-server.on('error', (err) => {
-    if (err.code === 'EADDRINUSE') {
-        console.error(`\n❌ ERRO: Porta ${PORT} já está em uso por outro processo.`);
-        console.error(`   Execute: netstat -ano | findstr :${PORT}`);
-        console.error(`   E depois: taskkill /PID <PID> /F\n`);
-    } else {
-        console.error('Erro no servidor:', err);
-    }
-    process.exit(1);
-});
+    server.on('error', (err) => {
+        if (err.code === 'EADDRINUSE') {
+            console.error(`\n❌ ERRO: Porta ${PORT} já está em uso por outro processo.`);
+            console.error(`   Execute: netstat -ano | findstr :${PORT}`);
+            console.error(`   E depois: taskkill /PID <PID> /F\n`);
+        } else {
+            console.error('Erro no servidor:', err);
+        }
+        process.exit(1);
+    });
+}
+
+export default app;

@@ -1523,7 +1523,8 @@ button, input, select, textarea {
 
 /* RESPONSIVE DESIGN */
 @media (max-width: 1024px) {
-    .app-layout {
+    .app-layout,
+    .checkout-layout {
         grid-template-columns: 1fr;
     }
     
@@ -2177,3 +2178,53 @@ button, input, select, textarea {
     color: #ea580c;
 }
 
+/* Validation feedback */
+.form-group input.is-invalid {
+    border-color: var(--accent-danger) !important;
+    box-shadow: 0 0 8px rgba(220, 38, 38, 0.25) !important;
+}
+
+.form-group input.is-valid {
+    border-color: var(--accent-success) !important;
+    box-shadow: 0 0 8px rgba(5, 150, 105, 0.25) !important;
+}
+
+.validation-message {
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+    font-weight: 500;
+}
+
+.validation-message.error {
+    color: #ef4444;
+}
+
+.validation-message.success {
+    color: #10b981;
+}
+
+/* Spinner for Loading States in Buttons */
+.btn-primary.btn-loading {
+    position: relative;
+    color: transparent !important;
+    pointer-events: none;
+}
+
+.btn-primary.btn-loading::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #ffffff;
+    top: calc(50% - 10px);
+    left: calc(50% - 10px);
+    animation: button-spinner 0.6s linear infinite;
+}
+
+@keyframes button-spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}
