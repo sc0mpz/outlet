@@ -13,6 +13,15 @@
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <span>🔒 Compra 100% Segura</span>
+            <span>💬 WhatsApp: 0800 777 9000</span>
+            <span>⚡ 10% de Desconto Adicional no Pix</span>
+        </div>
+    </div>
+
     <!-- HEADER -->
     <header class="main-header" id="mainHeader">
         <div class="header-container">
@@ -20,6 +29,15 @@
                 <a href="#" class="logo-link" style="color: #111111;">
                     PNEU<span class="logo-accent">OUTLET</span>
                 </a>
+            </div>
+            
+            <div class="header-search">
+                <div class="search-box">
+                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    <input type="text" id="searchInput" placeholder="Busque por carro, marca ou medida... (Ex: Onix, 175/70 R14)">
+                </div>
             </div>
             
             <nav class="nav-menu" id="navMenu">
@@ -71,15 +89,6 @@
 
     <!-- MAIN APP WRAPPER -->
     <main class="main-container" id="catalogo">
-        <!-- SEARCH & QUICK BAR -->
-        <div class="search-bar-container">
-            <div class="search-box">
-                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-                <input type="text" id="searchInput" placeholder="Busque pelo seu carro, marca ou medida... (Ex: Onix, HB20, Kwid, 175/70 R14)">
-            </div>
-        </div>
 
         <div class="app-layout">
             <!-- FILTER SIDEBAR -->
@@ -322,9 +331,47 @@
 
     <!-- FOOTER -->
     <footer class="main-footer">
-        <div class="footer-bottom">
-            <p>&copy; 2026 PneuOutlet S.A. CNPJ: 12.345.678/0001-90. Todos os direitos reservados.</p>
-            <p class="footer-small">Preços e condições válidos exclusivamente para compras no site. Imagens meramente ilustrativas.</p>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h4>Institucional</h4>
+                    <ul>
+                        <li><a href="#">Sobre a PneuOutlet</a></li>
+                        <li><a href="#">Nossas Lojas</a></li>
+                        <li><a href="#">Políticas de Privacidade</a></li>
+                        <li><a href="#">Termos e Condições</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Ajuda & Suporte</h4>
+                    <ul>
+                        <li><a href="#">Fale Conosco</a></li>
+                        <li><a href="#">Dúvidas Frequentes (FAQ)</a></li>
+                        <li><a href="#">Política de Devolução</a></li>
+                        <li><a href="#">Garantia Blindada</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Formas de Pagamento</h4>
+                    <div class="payment-icons">
+                        <span class="payment-badge">⚡ Pix (10% OFF)</span>
+                        <span class="payment-badge">💳 Cartão de Crédito</span>
+                        <span class="payment-badge-sub">Visa • Mastercard • Elo • Amex</span>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Segurança e Selos</h4>
+                    <div class="security-badges">
+                        <span class="security-badge">🔒 Certificado SSL Ativo</span>
+                        <span class="security-badge">🛡️ Site Blindado 2026</span>
+                    </div>
+                </div>
+            </div>
+            <hr class="footer-divider">
+            <div class="footer-bottom">
+                <p>&copy; 2026 PneuOutlet S.A. CNPJ: 12.345.678/0001-90. Todos os direitos reservados. Av. das Nações Unidas, 14200 - São Paulo, SP</p>
+                <p class="footer-small">Preços e condições válidos exclusivamente para compras no site. Imagens meramente ilustrativas.</p>
+            </div>
         </div>
     </footer>
 

@@ -366,7 +366,37 @@ function updateCartUI() {
     let subtotalOriginal = 0;
     let subtotalOutlet = 0;
     
-    elements.cartItemsList.innerHTML = state.cart.map(item => {
+    const totalTires = state.cart.reduce((sum, item) => sum + item.quantity, 0);
+    let progressHtml = "";
+    
+    if (totalTires > 0) {
+        let percent = 0;
+        let message = "";
+        if (totalTires === 1) {
+            percent = 50;
+            message = `Adicione +<strong>1 pneu</strong> e ganhe <strong>15% OFF</strong> (Par)!`;
+        } else if (totalTires === 2) {
+            percent = 70;
+            message = `<strong>Par (15% OFF) garantido!</strong> Adicione +<strong>2 pneus</strong> para ganhar <strong>30% OFF</strong> (Jogo)!`;
+        } else if (totalTires === 3) {
+            percent = 85;
+            message = `<strong>Par (15% OFF) garantido!</strong> Adicione +<strong>1 pneu</strong> para ganhar <strong>30% OFF</strong> (Jogo)!`;
+        } else if (totalTires >= 4) {
+            percent = 100;
+            message = `🎉 <strong>Desconto Máximo Ativado!</strong> Você economizou <strong>30% OFF</strong> no jogo de pneus!`;
+        }
+        
+        progressHtml = `
+            <div class="cart-progress-container">
+                <p class="cart-progress-text">${message}</p>
+                <div class="cart-progress-bar-bg">
+                    <div class="cart-progress-bar-fill" style="width: ${percent}%;"></div>
+                </div>
+            </div>
+        `;
+    }
+    
+    const itemsHtml = state.cart.map(item => {
         const qty = item.quantity;
         let extraDiscountPercent = 0;
         let discountBadge = "";
@@ -408,6 +438,8 @@ function updateCartUI() {
             </div>
         `;
     }).join('');
+    
+    elements.cartItemsList.innerHTML = progressHtml + itemsHtml;
     
     // 3. Totals
     const savings = subtotalOriginal - subtotalOutlet;
