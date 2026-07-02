@@ -487,8 +487,8 @@ async function updateOrderStatusInDb(hash, status) {
     }
 }
 
-// Inicia o Servidor Express apenas se rodar diretamente (não na Vercel Serverless)
-if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+// Inicia o Servidor Express apenas se não estiver em ambiente serverless (Vercel)
+if (!process.env.VERCEL) {
     const server = app.listen(PORT, () => {
         console.log(`🚀 Servidor Express Backend rodando em http://localhost:${PORT}`);
     });

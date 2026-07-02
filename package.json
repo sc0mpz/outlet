@@ -10,7 +10,8 @@
     "dev:all": "concurrently \"npm run dev\" \"node server.js\""
   },
   "devDependencies": {
-    "concurrently": "^10.0.3"
+    "concurrently": "^10.0.3",
+    "vercel": "^54.18.2"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.108.2",
