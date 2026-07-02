@@ -804,6 +804,24 @@ async function processOrderSubmit() {
         if (qrContainer && transaction.pix && transaction.pix.pix_qr_code) {
             const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(transaction.pix.pix_qr_code)}`;
             qrContainer.innerHTML = `<img src="${qrUrl}" alt="QR Code Pix" style="width: 100%; max-width: 220px; height: auto; border-radius: 12px; margin: 0 auto; display: block;">`;
+            
+            // Se for mock/simulação, adiciona um banner explicativo para evitar confusão
+            if (transaction.hash && transaction.hash.startsWith('mock_')) {
+                const warningDiv = document.createElement('div');
+                warningDiv.className = 'simulation-warning-badge';
+                warningDiv.style.backgroundColor = 'rgba(249, 115, 22, 0.1)';
+                warningDiv.style.border = '1px solid var(--primary)';
+                warningDiv.style.color = 'var(--primary)';
+                warningDiv.style.padding = '0.75rem';
+                warningDiv.style.borderRadius = '8px';
+                warningDiv.style.fontSize = '0.8rem';
+                warningDiv.style.marginTop = '1rem';
+                warningDiv.style.fontWeight = 'bold';
+                warningDiv.style.textAlign = 'center';
+                warningDiv.style.lineHeight = '1.3';
+                warningDiv.innerHTML = `⚠️ <strong>AMBIENTE DE SIMULAÇÃO</strong><br>Este QR Code é fictício e não pode ser pago em bancos reais. Aguarde 10 segundos para a aprovação automática!`;
+                qrContainer.appendChild(warningDiv);
+            }
         }
 
         // Código Copia e Cola
